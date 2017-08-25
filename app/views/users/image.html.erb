@@ -16,7 +16,7 @@
         </div>
         <div class = "text-center icon">
             <% if @user.image == nil %>
-                <%= image_tag('default_picture.jpg', :size => "200x200", :alt => "アイコン")%>
+                <%= image_tag("default_picture.jpg", :size => "200x200", :alt => "アイコン")%>
             <% else%>
                 <%= image_tag @user.image.url, :size => "200x200", :alt => "アイコン"%>
             <% end %>
