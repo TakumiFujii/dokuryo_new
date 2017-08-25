@@ -1,0 +1,34 @@
+<div style="background: white; padding: 30px; opacity: 0.8;">
+
+    <div class = "text-center">
+        <h2>ユーザデータの登録/編集</h2>
+    </div>
+    
+    <div class = "row">
+        <div class = "col-xs-6 col-xs-offset-3">
+            <ul class = "nav nav-tabs nav-inverse">
+                <li class="<%= 'active' if current_page?(profile_user_path(@user)) %>"><%= link_to profile_user_path(@user) do %>基本情報<% end %></li>
+                <li class="<%= 'active' if current_page?(image_user_path(@user)) %>"><%= link_to image_user_path(@user) do %>アイコン画像<% end %></li>
+                <li class="<%= 'active' if current_page?(email_user_path(@user)) %>"><%= link_to email_user_path(@user) do %>メールアドレス<% end %></li>
+                <li class="<%= 'active' if current_page?(password_user_path(@user)) %>"><%= link_to password_user_path(@user) do %>パスワード<% end %></li>
+            </ul><br>
+            <p>変更内容を入力して更新ボタンを押してください。</p>
+            <%= form_for(@user, url: profile_user_path(@user), html: { method: "PATCH"}) do |f| %>
+                <div class = "form-group">
+                    <%= f.label :nickname, "ユーザーネーム"%>
+                    <%= f.text_field :nickname, class: "form-control" %>
+                </div>
+                
+                <div class = "form-group">
+                    <%= f.label :gender, "性別"%>
+                    <%= f.select :gender, [["男性", "male"], ["女性", "female"]]%>
+                </div>
+                
+                <%= f.submit "変更", class: "btn btn-primary"%>
+                
+                
+            <% end %>
+        </div>
+    </div>
+
+</div>

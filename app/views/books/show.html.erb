@@ -1,0 +1,52 @@
+<div class = "row">
+  <aside class = "col-md-3">
+    <div class = "panel panel-primary">
+      <div class = "panel-heading">
+        <%= @book.title%>
+      </div>
+      <div class = "panel-body">
+        <div class = "text-center">
+          <%= image_tag @book.image_url, :size => "150x200", :alt => "本画像" %>
+        </div><Hr>
+        著者： <%= @book.author %>
+        <%= render 'ownerships/willread_button', book: @book %>
+        <%= render "ownerships/done_button", book: @book %>
+        <% if current_user.done_books.include?(@book)%>
+            <% if  @book.reviews.find_by(user_id: current_user.id)%>
+                <%= link_to "レビュー詳細", review_path(@book.reviews.find_by(user_id: current_user.id)), class: "btn btn-info btn-block"%>
+            <% else %>
+                <%= link_to "レビューを書く", new_review_path(book_id: @book.id), class: "btn btn-info btn-block"%>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </aside>
+  
+  <div class = "col-md-8">
+    <div class = "panel panel-primary">
+      <div class = "panel-heading">
+        レビュー一覧
+      </div>
+      <ul class = "media-list panel-body">
+        <% @reviews.each do |review|%>
+          <% @user = review.user %>
+          <li class = "media">
+            <div class = "media-left">
+              <% unless @user.image? %>
+                <%= image_tag('default_picture.jpg', :size => "50x50", :alt => "アイコン")%>
+              <% else %>
+                <%= image_tag @user.image.url, :size => "50x50", :alt => "アイコン"%>
+              <% end %>
+            </div>
+            <div class = "media-body">
+              <%= @user.nickname %>さんのレビュー<br>
+              評価：<%= review.rate %><br>
+              <%= link_to "レビューを読む", review_path(review)%>
+            </div>
+          </li>
+          <%= paginate @reviews %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

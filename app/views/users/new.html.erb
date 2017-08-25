@@ -1,0 +1,39 @@
+<div class ="row">
+    <div class="col-xs-offset-3 col-xs-6">
+        <div class = "panel panel-primary">
+            <div class = "panel-heading">
+                ユーザー登録
+            </div>
+            <div class = "panel-body">
+                <%= form_for(@user) do |f| %>
+                    <div class = "form-group">
+                        <%= f.label :nickname, "ユーザーネーム"%>
+                        <%= f.text_field :nickname, class: "form-control" %>
+                    </div>
+                    
+                    <div class = "form-group">
+                        <%= f.label :email, "メールアドレス"%>
+                        <%= f.email_field :email, class: "form-control" %>
+                    </div>
+                    
+                    <div class = "form-group">
+                        <%= f.label :gender, "性別" %>
+                        <%= f.select :gender, [["男性", "male"], ["女性", "female"]], class: "form-cotnrol"%>
+                    </div>
+                    
+                    <div class = "form-group">
+                        <%= f.label :password, "パスワード" %>
+                        <%= f.password_field :password, class: "form-control" %>
+                    </div>
+                    
+                    <div class = "form-group">
+                        <%= f.label :password_confirmation, "パスワード確認" %>
+                        <%= f.password_field :password_confirmation, class: "form-control" %>
+                    </div>
+                    
+                    <%= f.submit "登録", class: "btn btn-primary"%>
+                <% end %>
+            </div>
+        </div>
+     </div>   
+</div>

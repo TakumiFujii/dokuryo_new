@@ -1,0 +1,79 @@
+<% if logged_in? %>
+  <div class = "row">
+    <aside class = "col-md-4">
+      <div class = "panel panel-primary">
+        <div class = "panel-heading">
+          最近の読了
+        </div>
+        <% if @dones.present? %>
+          <% @dones.each do |done| %>
+            <div class ="media-left">
+              <% unless done.user.image? %>
+                <%= image_tag('default_picture.jpg', :size => "25x25", :alt => "アイコン")%>
+              <% else %>
+                <%= image_tag done.user.image.url, :size => "25x25", :alt => "アイコン", class: "media-object img-rounded img-responsive" %>
+              <% end %>
+            </div>
+            <div class = "media-body">
+              <%= link_to done.user.nickname, user_path(done.user) %> が <%=link_to done.book.title, book_path(done.book) %> を読了しました。
+            </div><br>
+          <% end %>
+        <% end %>
+      </div>
+      
+      <div class = "panel panel-primary">
+        <div class = "panel-heading">
+          最近のレビュー
+        </div>
+        <% if @reviews.present? %>
+          <% @reviews.each do |review| %>
+            <div class = "media-left">
+              <img class="media-object img-rounded" src="<%= review.user.image_url%>" width="25" height="25">
+            </div>
+            <div class = "media-body">
+              <%= link_to review.user.nickname, user_path(review.user) %> は <%= link_to review.book.title, book_path(review.book) %> のレビューを投稿しました。<%= link_to "(詳細)", review_path(review)%>
+            </div><br>
+          <% end %>
+        <% end%>
+      </div>
+    </aside>
+  
+    <div class="col-md-8">
+      <div class = "panel panel-primary">
+        <div class = "panel-heading">読まれている本</div>
+        <div class = "panel-body">
+          <% if @books.present?%>
+            <% @books.each_with_index do |book, index|%>
+              <div class="book col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading text-center">
+                    <img src="<%= book.image_url %>" alt="" >
+                  </div>
+                  <div class="panel-body">
+                    <%= link_to book.title, book_path(book)%>
+                    <div class="buttons text-center"></div>
+                  </div>
+                  <div class="panel-footer">
+                    <p class="text-center"><%= index+1 %>位: <%= @done_ranking_counts[book.id] %> 読了</p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<% else %>  
+    <div class = "newtop">
+        <div class = "text-center">
+            <h1>いい本に出会える場所</h1>
+            <p>素敵な本を読んで、感想をシェアしよう。みんながいい本を見つけられるように。</p>
+        </div>
+    </div>
+<% end %>
+
+
+
+   

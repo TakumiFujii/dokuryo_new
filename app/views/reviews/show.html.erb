@@ -1,0 +1,33 @@
+<div class = "row">
+  <aside class = "col-md-3">
+    <div class = "panel panel-primary">
+      <div class = "panel-heading">
+        <%= link_to @book.title, book_path(@book), :style => "color:white;"%>
+      </div>
+      <div class = "panel-body">
+        <div class = "text-center">
+          <%= image_tag @book.image_url, :size => "140x200", :alt => "本画像" %><Hr>
+        </div>
+        著者： <%= @book.author %>
+      </div>
+    </div>
+  
+  </aside>
+  
+  <div class = "col-md-8">
+    <div class = "text-center">
+      <h2><%= link_to @user.nickname, user_path(@user) %>さんのレビュー<h2><Hr>
+    </div>
+      <h3>五段階評価：<%= @review.rate %></h3>
+      <h3>レビュー内容</h3>
+      <%= @review.content %><br>
+      <div class = "text-right">
+        <%= link_to "他のレビューも見る", book_path(@book) %>
+      </div>
+  </div>
+  <% if current_user.reviews.find_by(id: @review.id)%>
+    <div class = "text-right">
+      <%= link_to "編集する", edit_review_path(@review), class: "btn btn-default" %>
+    </div>
+  <% end %>
+</div>

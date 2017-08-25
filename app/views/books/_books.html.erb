@@ -1,0 +1,36 @@
+<% if books.any? %>
+    <div class = "row">
+        <% books.each do |book| %>
+        <% %>
+            <div class = "book">
+                <div class = "col-md-4 col-xs-4 col-xs-12">
+                    <div class = "panel panel-default">
+                        <div class = "panel-heading text-center">
+                            <%= image_tag(book.image_url, :alt =>"picture") %>
+                        </div>
+                        <div class = "panel-body" style='height: 200px;'>
+                            <div class='title-wrapper' style='height: 50px;'>
+                              <% if Book.find_by(isbn: book.isbn)%>
+                                <p class = "book-title"><%= link_to book.title, book_path(book) %></p>
+                              <% else%>
+                                <p class = "book-title"><%= book.title %></p>
+                              <% end %>
+                            </div>
+                            <div class = "buttons text-center" >   
+                              <%= render 'ownerships/willread_button', book: book %>
+                              <%= render "ownerships/done_button", book: book %>
+                              <% if current_user.done_books.include?(book)%>
+                                  <% if  book.reviews.find_by(user_id: current_user.id)%>
+                                      <%= link_to "レビュー詳細", review_path(book.reviews.find_by(user_id: current_user.id)), class: "btn btn-info btn-block"%>
+                                  <% else %>
+                                      <%= link_to "レビューを書く", new_review_path(book_id: book.id), class: "btn btn-info btn-block"%>
+                                  <% end %>
+                              <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+<% end %>

@@ -1,0 +1,19 @@
+多　対　多　の完全なイメージできた。(userとuserで)
+
+逆とかなんとかわかりにくいけど
+何が大事って中間テーブルになんのカラムがあるのか考えること。
+
+user_idとfollow_idやろ？
+
+例えば俺（user_id=1）主観でやる。
+中間テーブルの中で考えてみろ。
+followingsってのはuser_id=1に対して何個ものfollow_idたちがあるやろ？
+ここが１対多なのが大事
+follow_idってのは俺(user_id１)がフォローしてる何人もの人のidたちがある。
+こいつら取得したいなら俺のfollowings(source: follow)でええやん！
+
+
+
+
+find ./ -type f -print | xargs grep 'hoge'
+全体検索できるやつ

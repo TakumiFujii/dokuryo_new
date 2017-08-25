@@ -1,0 +1,31 @@
+<div class = "text-center">
+    <h2>ユーザデータの登録/編集</h2>
+</div>
+
+<div class = "row">
+    <div class = "col-xs-6 col-xs-offset-3">
+        <ul class = "nav nav-tabs nav-inverse">
+            <li class="<%= 'active' if current_page?(profile_user_path(@user)) %>"><%= link_to profile_user_path(@user) do %>基本情報<% end %></li>
+            <li class="<%= 'active' if current_page?(image_user_path(@user)) %>"><%= link_to image_user_path(@user) do %>アイコン画像<% end %></li>
+            <li class="<%= 'active' if current_page?(email_user_path(@user)) %>"><%= link_to email_user_path(@user) do %>メールアドレス<% end %></li>
+            <li class="<%= 'active' if current_page?(password_user_path(@user)) %>"><%= link_to password_user_path(@user) do %>パスワード<% end %></li>
+        </ul><br>
+        <div class = "text-center">
+            <p>アイコンは右上、マイページで公開されます。<br>
+                登録のためにはファイルを選択、アップロードしてください。</p>
+        </div>
+        <div class = "text-center icon">
+            <% if @user.image == nil %>
+                <%= image_tag('default_picture.jpg', :size => "200x200", :alt => "アイコン")%>
+            <% else%>
+                <%= image_tag @user.image.url, :size => "200x200", :alt => "アイコン"%>
+            <% end %>
+        </div><br><br>
+            
+        <%= form_for(@user, url: image_user_path(@user), html: { method: "POST"}) do |f| %>
+            <%= f.label :image, "アイコン画像の選択"%>
+            <%= f.file_field :image, class: "form-control"%>
+            <%= f.submit "変更", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+</div>
