@@ -66,3 +66,7 @@ group :development do
   gem 'pry-byebug'
   gem 'awesome_print'
 end
+
+group :production do
+  gem 'pg'
+end
