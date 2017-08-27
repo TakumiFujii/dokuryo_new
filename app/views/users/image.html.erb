@@ -15,10 +15,10 @@
                 登録のためにはファイルを選択、アップロードしてください。</p>
         </div>
         <div class = "text-center icon">
-            <% if @user.image == nil %>
+            <% unless @user.image? %>
                 <%= image_tag("default_picture.jpg", :size => "200x200", :alt => "アイコン")%>
-            <% else%>
-                <%= image_tag @user.image.url, :size => "200x200", :alt => "アイコン"%>
+            <% else %>
+                <%= image_tag @user.image.url, :size => "200x200", :alt => "アイコン" %>
             <% end %>
         </div><br><br>
             
