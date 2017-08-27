@@ -11,7 +11,7 @@
               <% unless done.user.image? %>
                 <%= image_tag("default_picture.jpg", :size => "25x25", :alt => "アイコン")%>
               <% else %>
-                <%= image_tag done.user.image.url, :size => "25x25", :alt => "アイコン", class: "media-object img-rounded img-responsive" %>
+                <%= image_tag done.user.image.url, :size => "25x25", :alt => "アイコン" %>
               <% end %>
             </div>
             <div class = "media-body">
@@ -25,20 +25,24 @@
         <div class = "panel-heading">
           最近のレビュー
         </div>
-        <% if @reviews.present? %>
-          <% @reviews.each do |review| %>
-            <div class = "media-left">
-              <% unless review.user.image? %>
-                <%= image_tag("default_picture.jpg", :size => "25x25", :alt => "アイコン")%>
-              <% else %>
-                <%= image_tag review.user.image.url, :size => "25x25", :alt => "アイコン", class: "media-object img-rounded img-responsive" %>
-              <% end %>
-            </div>
-            <div class = "media-body">
-              <%= link_to review.user.nickname, user_path(review.user) %> は <%= link_to review.book.title, book_path(review.book) %> のレビューを投稿しました。<%= link_to "(詳細)", review_path(review)%>
-            </div><br>
-          <% end %>
-        <% end%>
+        <ul class = "media-list">
+          <% if @reviews.present? %>
+            <% @reviews.each do |review| %>
+              <li class = "media">
+                <div class = "media-left"> 
+                  <% unless review.user.image? %>
+                    <%= image_tag("default_picture.jpg", :size => "25x25", :alt => "アイコン")%>
+                  <% else %>
+                    <%= image_tag review.user.image.url, :size => "25x25", :alt => "アイコン" %>
+                  <% end %>
+                </div>
+                <div class = "media-body">
+                  <%= link_to review.user.nickname, user_path(review.user) %> は <%= link_to review.book.title, book_path(review.book) %> のレビューを投稿しました。<%= link_to "(詳細)", review_path(review)%>
+                </div>
+              </li>
+            <% end %>
+          <% end%>
+        </ul>
       </div>
     </aside>
   

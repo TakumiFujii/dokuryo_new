@@ -4,11 +4,7 @@
         <% book = review.book %>
         <li class = "media">
             <div class = "media-left">
-              <% unless @user.image? %>
-                <%= image_tag('default_picture.jpg', :size => "55x55", :alt => "アイコン")%>
-              <% else %>
-                <%= image_tag @user.image.url, :size => "200x200", :alt => "アイコン", class: "media-object img-rounded img-responsive" %>
-              <% end %>
+                <%= image_tag book.image_url, :size => "55x75", :alt => "アイコン" %>
             </div>
             <div class = "media-body">
                 <div>
